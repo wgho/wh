@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.yslm</groupId>
+	<artifactId>yishanglianmeng</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>yishanglianmeng</name>
+	<url>http://http://www.yishanglianmeng.com/</url>
+	<modules>
+		<module>common</module>
+		<module>util</module>
+		<module>model</module>
+		<module>dao</module>
+		<module>service</module>
+		<module>web</module>
+		<module>management</module>
+		<module>html</module>
+	</modules>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<!-- yslm version -->
+		<com.yslm.common.version>1.0.0-SNAPSHOT</com.yslm.common.version>
+		<com.yslm.util.version>1.0.0-SNAPSHOT</com.yslm.util.version>
+		<com.yslm.model.version>1.0.0-SNAPSHOT</com.yslm.model.version>
+		<com.yslm.dao.version>1.0.0-SNAPSHOT</com.yslm.dao.version>
+		<com.yslm.service.version>1.0.0-SNAPSHOT</com.yslm.service.version>
+		
+		<!-- 第三方jar版本 -->
+		<springframework.version>4.2.5.RELEASE</springframework.version>
+		<springframework.security.version>3.1.1.RELEASE</springframework.security.version>
+		<hibernate.version>5.1.0.Final</hibernate.version>
+		<hibernate.annotations.version>3.5.6-Final</hibernate.annotations.version>
+		<mysql.version>5.1.38</mysql.version>
+		<druid.version>1.0.17</druid.version>
+		<jackson.version>2.7.2</jackson.version>
+		<commons.lang.version>2.6</commons.lang.version>
+		<commons.fileupload.version>1.3.1</commons.fileupload.version>
+		<commons.io.version>2.4</commons.io.version>
+		<commons.pool.version>1.6</commons.pool.version>
+		<commons.codec.version>1.10</commons.codec.version>
+		<commons.logging.version>1.2</commons.logging.version>
+		<commons.lang3.version>3.4</commons.lang3.version>
+        <servlet.version>3.1.0</servlet.version>
+        <servlet.jsp.version>2.2</servlet.jsp.version>
+        <cglib.version>3.1</cglib.version>
+        <aspectj.version>1.8.8</aspectj.version>
+        <taglibs.version>1.1.2</taglibs.version>
+        <jstl.version>1.2</jstl.version>
+        <slf4j.version>1.7.18</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
+        <dom4j.version>1.6.1</dom4j.version>
+	</properties>
+
+
+</project>

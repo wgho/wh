@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<http pattern="/theme/**" security="none" />
+	<http pattern="/static/**" security="none" />
+	<http use-expressions="true" auto-config="false" disable-url-rewriting="true" entry-point-ref="customerAuthenticationEntryPoint">
+
+		<!-- 我的账户登录保护 -->
+		<!-- <intercept-url pattern="/user/list/**" access="hasAnyRole('NORMAL_USER','ADMIN_ROLE')" /> -->
+		<access-denied-handler error-page="/404error.html"/>
+		<logout invalidate-session="true"  logout-url="/logout" success-handler-ref="customerLogoutSuccessHandler"/>
+		<session-management>
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/logout"/>
+        </session-management>
+        <remember-me key="IuIJIfdsmQLFcDFJKEdjkGZNk" services-ref="rememberMeServices"/>
+        <custom-filter position="FORM_LOGIN_FILTER" ref="customerUsernamePasswordAuthenticationFilter"/>
+	</http>
+	
+	<beans:bean id="customerAuthenticationEntryPoint" class="com.yslm.web.security.entrypoint.CustomerAuthenticationEntryPoint">
+		<beans:constructor-arg value="/login.jsp" />
+		<beans:property name="useForward" value="false" />
+	</beans:bean>
+	
+	<beans:bean id="rememberMeServices"   class="com.yslm.web.security.service.IPTokenBasedRememberMeServices">  
+    	<beans:property name="userDetailsService" ref="securityUserService" />  
+    	<beans:property name="key" value="IuIJIfdsmQLFcDFJKEdjkGZNk" /> 
+    	<beans:property name="alwaysRemember" value="true" />
+    	<beans:property name="tokenValiditySeconds" value="3600"/>
+    	<beans:property name="cookieName" value="note_key" />
+	</beans:bean>
+	
+	<beans:bean id="customerUsernamePasswordAuthenticationFilter" class="com.yslm.web.security.filter.CustomerUsernamePasswordAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager"/>
+		<beans:property name="usernameParameter" value="username" />
+		<beans:property name="passwordParameter" value="password" />
+		<beans:property name="postOnly" value="true" />
+		<beans:property name="filterProcessesUrl" value="/login" />
+		<beans:property name="authenticationSuccessHandler" ref="customerAuthenticationSuccessHandler" />
+	    <beans:property name="authenticationFailureHandler" ref="customerAuthenticationFailedHandler" />
+	    <beans:property name="authenticationDetailsSource" ref="authenticationDetailsSourceImpl"/>
+	</beans:bean>
+	
+	<beans:bean id="authenticationDetailsSourceImpl" class="org.springframework.security.authentication.AuthenticationDetailsSourceImpl">
+        <beans:property name="clazz" value="com.yslm.web.security.service.SecurityWebAuthenticationDetails"/>
+    </beans:bean>
+	
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="customerSecurityAuthenticationProvider" />
+	</authentication-manager>
+	
+	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
+	<beans:bean id="securityUserService" class="com.yslm.web.security.service.SecurityUserDetailsService" />
+	<beans:bean id="customerSecurityAuthenticationProvider" class="com.yslm.web.security.provider.CustomerSecurityAuthenticationProvider">
+	    <beans:property name="userDetailsService" ref="securityUserService"/>
+        <beans:property name="passwordEncoder" ref="passwordEncoder"/>
+	</beans:bean>
+	
+	<beans:bean id="customerAuthenticationSuccessHandler" class="com.yslm.web.security.handler.CutomerAuthenticationSuccessHandler">
+	    <beans:property name="defaultTargetUrl"  value="/loginSuccess" />
+	</beans:bean>
+	<beans:bean id="customerAuthenticationFailedHandler" class="com.yslm.web.security.handler.CustomerAuthenticationFailedHandler">
+	    <beans:property name="defaultFailureUrl"  value="/loginFailed" />
+	    <beans:property name="useForward" value="true" />
+	</beans:bean>
+	
+	
+    <beans:bean id="customerLogoutSuccessHandler" class="com.yslm.web.security.handler.CustomerSuccessLogoutHandler">
+        <beans:property name="defaultTargetUrl" value="/login.jsp" />
+    	<beans:property name="alwaysUseDefaultTargetUrl" value="false" />
+    </beans:bean>
+</beans:beans>

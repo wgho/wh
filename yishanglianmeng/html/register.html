@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>会员注册</title>
+<link href="/statics/css/base.css" rel="stylesheet">
+<script type="text/javascript" src="/statics/js/jquery-1.11.3.min.js"></script>
+<!--[if lt IE 9]>
+<script src="statics/js/html5shiv.js"></script>
+<![endif]-->
+<link href="/statics/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="/statics/js/jquery-html5Validate.js"></script>
+</head>
+<body id="login_body">
+<div class="login_top_btn"><a class="btn" href="login.html">立即登录</a></div>
+<section class="reg_box">
+	<form class="register-form"  id="registerForm">
+                   		<div class="logo_icon"></div>
+						<div class="logo_text">【会员注册】</div>
+       <div class="form_body">
+          <div class="control-group">
+            <label class="control-label" for="nickname">用户昵称</label>
+            <div class="controls">
+              <input type="text" id="nickname" class="span3" onblur="checkParam('nickname')" placeholder="请输入昵称" nullmsg="请填写昵称" value="" name="nickname" required>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">密 码</label>
+            <div class="controls">
+              <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码" nullmsg="请填写密码" name="password" required>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="repassword">确认密码</label>
+            <div class="controls">
+              <input type="password" id="repassword" class="span3" placeholder="请再次输入密码" nullmsg="请填确认密码" name="repassword" required>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputMoble">手机号码</label>
+            <div class="controls">
+              <input type="text" id="mobile" class="span3" onblur="checkParam('mobile')" placeholder="请输入手机号码" nullmsg="请填写手机号码" value="" name="mobile" required>
+            </div>
+          </div>     
+          <div class="control-group">
+            <label class="control-label" for="inputEmail">邮箱</label>
+            <div class="controls">
+              <input type="email" id="email" class="span3" onblur="checkParam('email')" placeholder="请输入电子邮件" nullmsg="请填写邮箱" value="" name="email" required>
+            </div>
+          </div>      
+          <div class="control-group">
+          	<label class="control-label">&nbsp;</label>
+            <div class="controls">
+              <input  type="button" onclick="register()" class="btn btn-large" value="注 册"></input>
+            </div>
+          </div>
+      </div>
+    </form>
+</section>
+</body>
+<script type="text/javascript">
+	$("register-form").html5Validate(function(){
+		alert("注册成功！");
+	});
+</script>
+<script src="/statics/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script charset="UTF-8" type="text/javascript" src="/statics/plugins/lhgdialog/lhgdialog.js"></script>
+<script charset="UTF-8" type="text/javascript" src="/statics/plugins/lhgdialog/lhgdialog.min.js"></script>
+<script src="/statics/js/common/jquery-common.js" type="text/javascript" charset="utf-8"></script>
+<script src="/statics/js/config/http-code.js" type="text/javascript" charset="utf-8"></script>
+<script src="/statics/js/front/register.js"></script>
+</html>
